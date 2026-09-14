@@ -1,0 +1,37 @@
+\documentclass{exam}
+\usepackage{../shah311}
+
+\begin{document}
+
+    \pagestyle{headandfoot}
+    \runningheadrule
+    \firstpageheader{}{}{}
+    \runningheader{MATH311}{Intro Real Analysis}{Rong}
+    \firstpagefooter{}{}{}
+    \runningfooter{}{\thepage}{}
+
+    \begin{titlepage}
+        \begin{tcolorbox}[valign=center]
+            \begin{center}
+                \hspace{0pt}
+                \vfill
+                \fontsize{45}{45}\scshape MATH311 NOTES
+                \vfill
+                \hspace{0pt}
+            \end{center}
+        \end{tcolorbox}
+    \end{titlepage}
+
+    \newpage
+
+    \pdfbookmark[1]{Contents}{toc}
+    \tableofcontents
+
+    \newpage
+
+    \include{unit1/main}
+
+    \include{unit2/main}
+
+    \include{unit3/main}
+\end{document}
