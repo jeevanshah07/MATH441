@@ -1,0 +1,180 @@
+\documentclass{exam}
+\usepackage{../../shah311}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Parikh \\ Intro Topology}{Homework 2}{Jeevan Shah}
+\runningheader{Intro Topology \\ Homework 2}{}{Shah}
+\firstpagefooter{}{}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+\begin{document}
+\colorbox{red}{\underline{3:}}
+\begin{solution}
+    \begin{enumerate}
+        \item $A$ is the union of open intervals $\left(-1, -\frac{1}{2}\right) \cup \left(\frac{1}{2}, 1\right)$ so $A$ is open in $\RR$ since $A \subseteq Y$, $A$ is open in $Y$
+        \item $B = \left[-1, -\frac{1}{2}\right) \cup \left(\frac{1}{2}, 1\right]$ is open in $Y$ since $B = Y \cap \left(\left(-2, -\frac{1}{2}\right) \cup \left(\frac{1}{2}, 2 \right)\right)$ which is an open set of $\RR$. $B$ is not open in $\RR$ since $1 + \epsilon \not\in B\, \forall \epsilon > 0$. 
+        \item $C = \left(-1, -\frac{1}{2}\right] \cup \left[\frac{1}{2}, 1\right)$ is not open in $Y$ or $\RR$ since $\frac{1}{2} - \epsilon < \frac{1}{2} \Rightarrow \frac{1}{2} - \epsilon \not\in C$
+        \item $D$ is clearly not open in $Y$ or $\RR$
+        \item $E$ is open in $Y$ and $\RR$ since the density of $\QQ$ in $\RR$ ensures $\exists\, \epsilon > 0 \st (y - \epsilon, y + \epsilon) \subseteq Y$ for $y \in Y$.
+    \end{enumerate}   
+\end{solution}
+
+\colorbox{red}{\underline{4:}}
+\begin{solution}
+    \begin{proof}
+        Every open set in $X \times Y$ can be represented as a union of basis elements that are open rectangles of the form $U_i \times V_i$ for $U_i \in X$ open and $V_i \in Y$ open. By definintion we have 
+        \[
+            \pi_1(U \times V) = \braces{\pi_1(u \times v) \mid (u, v) \in U \times V} = \braces{u \mid (u, v) \in U \times V \text{ for some } V}
+        \]
+        Now if $V = \varnothing$ then $U \times V = \varnothing$ and hence $\pi_1(U \times V)$ is open in $X$. If $V \neq \varnothing$ then by definiton $\pi_1(U \times V)$ is open in $X$ since for every $u \in U$ and any $v_0 \in V$ the pair $(u, v_0) \in U \times V$ so $u \in \pi_1(U \times V)$. Also, every element of $\pi_1(U \times V)$ is some $u$ with $(u, v) \in U \times V$ so that $u \in U$ and $\pi_1(U \times V) = U$ which is open in $X$. A near identical argument exists for $\pi_2: X \times Y \to Y$.
+    \end{proof}
+\end{solution}
+
+\colorbox{red}{\underline{6:}}
+\begin{solution}
+    It is clear that 
+    \[
+        \beta = \braces{(a, b) \times (c, d) \mid a, b, c, d, \in \QQ(a < b, c < d)} 
+    \]
+    covers $\RR^{2}$ since any $(x, y) \in \RR^{2}$ will be in $\beta$, even for $x, y \in \RR \setminus \QQ$ due to the density of $\QQ$ in $\RR$. It is also clear that $\beta$ is countable since we may define the map $(a, b) \times (c, d) \in \beta \mapsto (a, b, c, d) \in \QQ^{4}$. Now, for some $(x, y) \in B_1 \cap B_2$ with $B_1, B_2 \in \beta, \exists\, B_3 \in \beta \st (x, y) \in B_3$. However, since elements of $\beta$ are open rectangles in $\RR^2, B_1 \cap B_2$ is also an open rectangle and hence we take $B_3 = B_1 \cap B_2$ so $(x, y) \in B_3 \subseteq B_1 \cap B_2 \in \beta$. Thus $\beta$ is a basis.
+
+    We now show $\beta$ generates the standard topology on $\RR^2$. Let $\beta'$ denote the standard basis of open rectangles $(a,b) \times (c,d)$ with $a,b,c,d \in \RR$. We show $\beta$ and $\beta'$ generate the same topology by mutual refinement.
+
+    ($\beta$ refines into $\beta'$, trivially): Since $\QQ \subseteq \RR$, every $B \in \beta$ is already an element of $\beta'$, so for any $B \in \beta$ and $x \in B$, take $B$ itself as the element of $\beta'$ contained in $B$.
+
+    ($\beta'$ refines into $\beta$): Let $B' = (a,b) \times (c,d) \in \beta'$ with $a,b,c,d \in \RR$, and let $(x,y) \in B'$, so $a < x < b$ and $c < y < d$. By density of $\QQ$ in $\RR$, choose $a', b', c', d' \in \QQ$ with
+    \[
+        a < a' < x < b' < b, \qquad c < c' < y < d' < d.
+    \]
+    Then $B = (a', b') \times (c', d') \in \beta$ and $(x,y) \in B \subseteq B'$.
+
+    Since every element of $\beta'$ can be refined by an element of $\beta$ containing any given point, and vice versa, $\beta$ and $\beta'$ generate the same topology. Hence $\mathcal{T}_\beta$ is the standard topology on $\RR^2$.
+\end{solution}
+
+\colorbox{red}{\underline{8:}}
+\begin{solution}
+    The set $L$ must be in one of the following forms:
+    \begin{align*}
+        L_1 &= \braces{(x, n) \mid x \in \RR, n \in \RR \text{ constant}} \quad \text{(horizontal line)} \\
+        L_2 &= \braces{(n, y) \mid y \in \RR, n \in \RR \text{ constant}} \quad \text{(vertical line)} \\
+        L_3 &= \braces{(x, y) \mid y = mx + b, m, b \in \RR \text{ constant}} \quad \text{(line with slope $m$)}
+    \end{align*}
+    i.e. either a horizontal line, vertical line, or a line with linear slope. $\RR_{\ell} \times \RR = \left[a, b\right) \times \left(c, d\right)$ for $a, b, c, d \in \RR$ so $L_1 \cap \left(\RR_{\ell} \times \RR\right)$ is either empty if $n < b$ or $n > d$ or 
+    \[
+        L_1 \cap \left(\RR_{\ell} \times \RR\right) = \braces{\left[x, n\right) \mid x \in \RR(a \leq x < c)}.
+    \]
+    Similarly, we have 
+    \[
+        L_2 \cap \left(\RR_{\ell} \times \RR\right) = \braces{\left(n, y\right) \mid y \in \RR(b < y < d)}.
+    \]
+    if $a < n < c$, and empty otherwise. Finally 
+    \[
+        L_3 \cap \left(\RR_{\ell} \times \RR\right) = \braces{\left[x, y\right) \mid x, y \in \RR(a \leq x < c, b < y < d)} 
+    \]
+    and hence $L_1$ inherits the lower-limit topology along with $L_3$ while $L_2$ inherits the subspace topology. \\
+    Now, consider $\RR_{\ell} \times \RR_{\ell} = \left[a, b\right] \times \left[c, d\right]$. Once again
+    \begin{align*}
+        L_1 \cap (\RR_\ell \times \RR_\ell) &= \braces{\left[x, n\right) \mid x \in \RR(b < n < d)} \\
+        L_2 \cap (\RR_\ell \times \RR_\ell) &= \braces{\left[n, y \right) \mid y \in \RR(a \leq n \leq c)}.
+    \end{align*}
+    However, we now split $L_3$ into $L_{3'}$ and $L_4$ where $L_{3'}$ is $L_3$ with $m \geq 0$ and $L_4$ is $L_3$ with $m < 0$. Then 
+    \begin{align*}
+        L_{3'} \cap (\RR_\ell \times \RR_\ell) &= \braces{\left(x, y\right) \mid x \in \left[p, q\right), y \in \left[c, d\right)} \\
+        L_4 \cap (\RR_\ell \times \RR_\ell) &= \braces{\left(x, y \right) \mid x \in \left(p, q\right], y \in \left[c, c\right)}
+    \end{align*}
+    where $p, q$ are the left and right endpoints of the intersection of $L$ with $\RR_\ell \times \RR_\ell$. Hence $L_{1}, L_{2}, L_{3'}$ all have the lower limit topology, while $L_4$ has the upper limit topology.
+\end{solution}
+
+\colorbox{red}{\underline{9:}}
+\begin{solution}
+    Since $\RR_d$ is the discrete topology and contains all singletons, the basic open products are 
+    \[
+        \braces{x} \times V, x \in \RR \text{ and } V \text{ open in } \RR.  
+    \]
+    The other topology has basis elements consisting of open intervals $\left(\left(x_1, y_1\right), \left(x_2, y_2\right)\right)$. \\
+    \underline{Case 1($x_1 = x_2 = x_0$):} In this case we have 
+    \[
+        \braces{\left(x_0, y\right) \mid y_1 < y < y_2} = \braces{x_0} \times (y_1, y_2) 
+    \]
+    which is a basis element of $\RR_d \times \RR$ since $(y_1, y_2)$ is open in $\RR$. \\
+    \underline{Case 2($x_1 < x_2$):} Now, consider when $x = x_1, x_1 < x < x_2$, and $x = x_2$. One $x = x_1$ points $(x_1, y)$ satisfy $(x_1, y_1) < (x_1, y)$ so $y > y_1$ and since $x_1 < x_2$ ther eis no bound from $y_2: \braces{x_1} \times (y_1, \infty)$. For $x_1 < x < x_2$ any $(x, y)$ has $(x_1, y_1) < (x, y) < (x_2, y_2): \braces{x} \times \RR$. Now if $x = x_2$, similar to before we have $\braces{x_2} \times \left(-\infty, y_2\right)$. \\
+    Putting it all together we see 
+    \[
+        \left(\left(x_1, y_1\right), \left(x_2, y_2\right)\right) = \left(\braces{x_1} \times \left(y_1, \infty\right)\right) \cup \left(\bigcup_{x_1 < x < x_2} \braces{x} \times \RR\right) \cup \left(\braces{x_2} \times \left(-\infty, y_2\right)\right)
+    \]
+    So that every part is of the form $\braces{x} \times V$ for $V$ open in $\RR$ making them basis elements. \\
+    Now, every product basis element $\braces{x} \times V$ (for $V$ open in $\RR$, a union of open intervals $\left(y_1, y_2\right)$) is a dictionary-order basic interval: 
+    \[
+        \braces{x} \times (y_1, y_2) = \left(\left(x_1, y_1\right), \left(x_2, y_2\right)\right)
+    \]
+    which we showed is a basis element earlier. \\
+    This $\mathcal{T}_{\text{dict}} = \mathcal{T}_{\RR_{d} \times \RR}$ and is finer than the standard topology on $\RR^{2}$ since singletons $\braces{x} \times V$ are open here and not in $\RR^{2}$.
+\end{solution}
+
+\colorbox{red}{\underline{3:}}
+\begin{solution}
+    \begin{proof}
+        Assume $A, B$ are sets such that $A \subseteq X$ and $B \subseteq Y$ are closed. It follows that $A \times B \subseteq X \times Y$ is closed. This is because its  complement $(A \times B)^{c}$ is open since 
+        \begin{align*}
+            (A \times B)^c &= (X \times Y) \setminus (A \times B) \\
+            &= (X \times (X \setminus A)) \times (Y \times (Y \setminus B))
+        \end{align*}
+        but $X \setminus A$ is open and so is $Y \setminus B$.
+    \end{proof}
+\end{solution}
+
+\colorbox{red}{\underline{11:}}
+\begin{solution}
+    \begin{proof}
+        Let $X, Y$ be Hausdorff. Consider $(x_1, y_2), (x_2, y_2) \in X \times Y$. Since $X$ and $Y$ are Hausdorff it follows that there exists neighborhoods $U_1, U_2 \subseteq X$ and $V_1, V_2 \subseteq Y \st U_1 \cap U_2 = \varnothing$ and $V_1 \cap V_2 = \varnothing$ where $x_1 \in U_1, x_2 \in U_2, y_1 \in V_1, y_2 \in V_2$. Hence $(x_1, y_1) \in U_1 \times V_1 \subseteq X \times Y$ and $(x_2, y_2) \in U_2 \times V_1 \subseteq X \times Y$ and $(U_1 \times V_1) \cap (U_2 \times V_2) = \varnothing$ and thus $X \times Y$ is Hausdorff.
+    \end{proof}
+\end{solution}
+
+\colorbox{red}{\underline{13:}}
+\begin{solution}
+    \begin{proof}
+        $(\Rightarrow)$ Assume $X$ is Hausdorff and consider $(x, y) \in X \setminus \Delta$ so that $x \neq y$. Then there exists open sets $u, V$ such that $(x, y) \in U \times V \subseteq (X \times X) \setminus \Delta$ and that $x \in U, y \in V$, and $U \cap V = \varnothing$. It follows that no $(z, z) \in \Delta$ and $(z, z) \in U \times V$ since then $z \in U$ and $z \in V$ which is a contradiction so $(X \times X) \setminus \Delta$ is open and thus $\Delta$ is closed in $X \times X$. \\
+        $(\Leftarrow)$ Now take $\Delta$ to be closed in $X \times X$ so that $(X \times X) \setminus \Delta$ is open. Thus $\exists\, U, V$ open such that $U \times V$ open with $(x, y) \in U \times V$ for $x \neq y$ and $U \times V \subseteq (X \times X) \setminus \Delta$. Since $(U \times V) \cap \Delta = \varnothing$ it follows that $x \in U$ and $y \in V$ and that $U \cap V = \varnothing$ since otherwise the intersection with $\Delta$ would be nonempty. Thus, $X$ is Hausdorff.
+    \end{proof}
+\end{solution}
+
+\colorbox{red}{\underline{14:}}
+\begin{solution}
+    $(x_n) = \frac{1}{n}$ converges to all $x \in \RR$ since every $x_n$ and $x_m$ (with $m \neq n$) are distinct so at most a finite amount of them are contained in the finite set $R \setminus U$ so infinitely many line in U: past some $n > N$, every $x_n \in U$.
+\end{solution}
+
+\colorbox{red}{\underline{19:}}
+\begin{solution}
+    \begin{parts}
+        \part Suppose $x \in \Int A$ so $\exists\, U$ open with $x \in U \subseteq A$ so $U \cap (X \setminus A) = \varnothing$. Thus $U$ is an open set containing $x$ but disjoint from $X \setminus A$ so $x \not\in \overline{(X \setminus A)}$ and hance $x \not\in \Bd{A}$ and $\Bd{A} \cap \Int{A} = \varnothing$. \\
+        Now $\Int{A} \subseteq A \subseteq \overline{A}$ and $\Bd{A} \subseteq \overline{A}$ so $\Int{A} \cup \Bd{A} \subseteq \overline{A}$. Now take $x \in \overline{A}$. If $x \in \Int{A}$ we are done. If $x \not\in \Int{A}$ then no open set containing $x$ lies in $A$. Equivalently $\forall\, U$ open such that $x \in U, U \not\subseteq A$ and hence $U \cap (X \setminus A) \neq \varnothing$ so $x \in \overline(X \setminus A)$ so since $x \in \overline{A}, x \in \overline{A} \cap \overline{(X \setminus A)} = \Bd A$
+
+        \part $(\Leftarrow)$ Suppose $A$ is clopen, so $A = \overline{A}$ and $X \setminus A$ closed and thus $X \setminus A = \overline{X \setminus A}$. It follows that 
+        \[
+            \Bd A = A \cap (X \setminus A) = \varnothing
+        \]
+        $(\Rightarrow)$ Let $\Bd A = \varnothing$. By (a), 
+        \[
+            \overline{A} = \Int A \cup \Bd A = \Int A
+        \]
+        But $\Int A \subseteq A \subseteq \overline{A}$ so 
+        \[
+            \Int A \subseteq A \subseteq \overline{A} = \Int A
+        \]
+        forcing $A = \Int A = \overline{A}$ so $A$ is clopen.
+
+        \part $(\Rightarrow)$ Let $U$ open so $\Int U = U$. By (a) $\overline{U} = \Int U \cup \Bd U = U \cup \Bd U$ which is a disjoint union and so $\overline{U}\setminus U = \Bd U$. \\
+        $(\Leftarrow)$ Suppose $\Bd U = \overline{U} \setminus U$ so $\Bd U \cap U = \varnothing$. Let $x \in U$ so $x \in \overline{U}$ and by (a) $\overline{U} = \Int U \cup \Bd U$. If $x \not\in \Int U$ then $x \in \Bd U$ which is a contradiction since $\Bd U \cap U = \varnothing$ and thus $x \in \Int U$. Hence $U \subseteq \Int U$ so $U = \Int U$.
+
+        \part No, let $U = (0, 1) \cup (1, 2)$ in $\RR$ so $\overline{U} = \left[0, 2\right]$ and $\Int \overline{U} = (0, 2)$ but $1 \in \Int \overline{U}$ and $1 \not\in U$.
+    \end{parts}
+\end{solution}
+
+\footnotetext{\LaTeX\, code for this document can be found on github \href{https://github.com/jeevanshah07/MATH441/blob/main/homework/homework2/main.tex}{\underline{here}}}
+\end{document}
