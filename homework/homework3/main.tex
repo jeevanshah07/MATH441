@@ -16,7 +16,7 @@
 \begin{document}
 \colorbox{red}{\underline{2:}}
 \begin{solution}
-    No, consider $f: \RR \to \RR$ by $x \mapsto 0$. Take $A = \RR$ and $x = 0$ so that $x$ is a limit point of $A$ but $f(A) = \braces{0}$ which has no limit points since it is a singleton set and every neighborhood around $0$ only contains $0$. Thus $f(x) = 0$ is not a limit point of $f(A)$.
+    No, consider $f: \RR \to \RR$ by $x \mapsto 0$. Take $A = \RR$ and $x = 0$ so that $x$ is a limit point of $A$ but $f(A) = \braces{0}$ which has no limit points since it is a singleton set: every neighborhood of $0$ meets $f(A)$ only in $0$. Thus $f(x) = 0$ is not a limit point of $f(A)$.
 \end{solution}
 
 \colorbox{red}{\underline{4:}}
@@ -24,13 +24,13 @@
     \begin{proof}
         Without loss of generality we will show that $f: X \to X \times Y$ for $x \mapsto (x, y_0)$ is an embedding. It is clear that $f$ is continuous since the sets $U \times V$ for $U \subseteq X$ open and $V \subseteq Y$ open form a basis for the product topology and 
         \[
-            f^{-1}(U \times V) = \braces{x \mid (x, y_0) \in U \times V} = \braces{x \in U \mid y \in V}
+            f^{-1}(U \times V) = \braces{x \mid (x, y_0) \in U \times V} = \braces{x \in U \mid y_0 \in V}
         \]
         which is $U$ if $y_0 \in V$ and empty otherwise. Both sets are open in $X$ and hence $f$ is continuous. It is also obvious that $f$ is injective as if $f(x_1) = f(x_2)$ then
         \[
         (x_1, y_0) = (x_2, y_0) \Rightarrow x_1 = x_2.
         \]
-        Now to show that $f^{-1}$ is continuous we first notice that $f(X) = X \times {y_0}$, and the projection $\pi_X(f(x)) = x$. So, the inverse $f(X) \to X$ is the restriction of $\pi_X$ to the subspace $f(X)$, which is continuous. \\
+        Now to show that $f^{-1}$ is continuous we first notice that $f(X) = X \times \braces{y_0}$, and the projection $\pi_X(f(x)) = x$. So, the inverse $f(X) \to X$ is the restriction of $\pi_X$ to the subspace $f(X)$, which is continuous. \\
         An almost identical argument exists for $g: Y \to X \times Y$.
     \end{proof}
 \end{solution}
@@ -51,19 +51,25 @@
             \[
                 h^{-1}(C) = \braces{x \mid f(x) \leq g(x)}
             \]
-            We now show that $C$ is closed in $Y$. Consider $Y \setminus C = \braces{(a, b) \mid a > b}$. If there exists $c$ such that $b < c < a$, then we take $U = (c, \infty)$ and $V = (-\infty, c)$ so for any $a' \in U$ and $b' \in V$ is it obvious that $(a', b') \in U \times V$. If there does not exist such $c$, we have $U = (b, \infty)$ and $V = (-\infty, a)$ so $a \in U$ and $b \in V$. Thus for $a' \in U$ and $b' \in V$ we have $a' > b$ and $b' < a$ but $a' \geq a$ and $b' \leq b$ and so 
+            We now show that $C$ is closed in $Y \times Y$. Take $(a, b) \in (Y \times Y) \setminus C$, so $a > b$. We find open sets $U \ni a$, $V \ni b$ with $U \times V \subseteq (Y \times Y) \setminus C$.
+
+            \underline{Case 1:} there exists $c$ with $b < c < a$. Take $U = (c, \infty)$ and $V = (-\infty, c)$. Then $a \in U$, $b \in V$, and for any $a' \in U$, $b' \in V$ we have $a' > c > b'$, so $(a', b') \notin C$.
+
+            \underline{Case 2:} there is no such $c$. Take $U = (b, \infty)$ and $V = (-\infty, a)$, so $a \in U$ and $b \in V$. For $a' \in U$ and $b' \in V$ we have $a' > b$ and $b' < a$. Since nothing lies strictly between $b$ and $a$, this gives $a' \geq a$ and $b' \leq b$, so 
             \[
                 a' \geq a > b \geq b'
             \]
-            thus $(a', b') \in U \times V$. So, since $U, V$ open and $U \times V$ is open it follows that $Y \setminus C$ is also open and thus $C$ is closed in $Y$. Since $f$ and $g$ are continuous, $h$ is also continuous and thus $h^{-1}(C)$ is closed in $X$.
+            and thus $(a', b') \notin C$.
+
+            In both cases $U \times V$ is an open neighborhood of $(a, b)$ contained in $(Y \times Y) \setminus C$. So $(Y \times Y) \setminus C$ is open and $C$ is closed in $Y \times Y$. Since $f$ and $g$ are continuous, $h$ is also continuous and thus $h^{-1}(C)$ is closed in $X$.
         \end{proof}
 
         \part \begin{proof}
-            Using $(a)$ define $A, B \subseteq X$ closed by 
+            Using $(a)$ (and $(a)$ with the roles of $f$ and $g$ swapped), the sets
             \[
                 A = \braces{x \mid f(x) \leq g(x)} \quad\text{and}\quad B = \braces{x \mid f(x) \geq g(x)}
             \]
-            It is clear that $X = A \cup B$ since by definition of orders every $x$ either has $f(x) > g(x), g(x) < f(x)$, or $f(x) = g(x)$. Then, we note that on $A$, $\min\braces{f(x), g(x)}$ and similarly on $B, \min\braces{f(x), g(x)} = g(x)$ so that $h|_{A} = f(x)$ and $h|_{B} = g(x)$. Note that if for some $x$ we have $f(x) = g(x)$ it doesn't matter whether $h$ is restricted to $A$ or $B$, since $x \in A \in B$ then $f(x) = g(x)$. Thus, by the pasting lemma, $h$ is continuous.
+            are closed in $X$. Let $m(x) = \min\braces{f(x), g(x)}$. Since the order is total, every $x$ satisfies $f(x) < g(x)$, $f(x) > g(x)$, or $f(x) = g(x)$, so $X = A \cup B$. On $A$ we have $m(x) = f(x)$ and on $B$ we have $m(x) = g(x)$, so $m|_A = f|_A$ and $m|_B = g|_B$ are continuous. If $x \in A \cap B$ then $f(x) = g(x)$, so the two formulas agree there. Thus, by the pasting lemma, $m$ is continuous.
         \end{proof}
     \end{parts}
 \end{solution}
@@ -76,55 +82,61 @@
             \[
                 X = \bigcup_{\alpha} A_\alpha
             \]
-            and $f|_{A_{\alpha}}$ is continuous and for $i \neq j f|_{A_{\alpha_{i}}} = f|_{A_{\alpha_{j}}}$ for all $x \in A_{\alpha_{i}} \cap A_{\alpha_{j}}$. Thus, by the pasting lemma we have that $f$ is continuous by letting $f = f|_{A_{\alpha_{i}}}$ if $x \in A_{\alpha_{i}}$. 
+            and $f|_{A_{\alpha}}$ is continuous and for $i \neq j f|_{A_{\alpha_{i}}} = f|_{A_{\alpha_{j}}}$ for all $x \in A_{\alpha_{i}} \cap A_{\alpha_{j}}$. Thus, by the pasting lemma (for finitely many closed sets, by induction from the two-set version) we have that $f$ is continuous by letting $f = f|_{A_{\alpha_{i}}}$ if $x \in A_{\alpha_{i}}$. 
         \end{proof}
 
-        \part Let $X = [0, 1]$ and $A_\alpha = \left[\frac{1}{\alpha}, 1\right] \cup \braces{0}$. Clearly 
+        \part Let $X = [0, 1]$, $A_\alpha = \left[\frac{1}{\alpha}, 1\right] \cup \braces{0}$ for $\alpha \in \NN$, and define $f: [0, 1] \to \RR$ by $f(0) = 0$ and $f(x) = 1/x$ for $x \neq 0$. Clearly 
         \[
             X = \bigcup_{\alpha} A_\alpha 
         \]
-        and each $A_\alpha$ is clsoed. Also $f|_{A_{\alpha}}$ is continuous since $f(x) = 1/x$ is clearly continuous on $\left[\frac{1}{\alpha}, 1\right]$, and $0$ is an isolated point of $A_\alpha$. As well, $f$ is not continuous at $0$ since for $x_n = 1/n, x_n \to 0$ but $f(x_n) \to \infty$ thus $f(x_n)$ does not converge to $0$. Thus, each $A_\alpha$ is closed and there are only a countable $A_\alpha$ (seen by the map $n \mapsto A_n$ for $n \in \NN$) but $f$ is not continuous. 
+        and each $A_\alpha$ is closed, being a union of two closed sets. Also $f|_{A_{\alpha}}$ is continuous since $f(x) = 1/x$ is clearly continuous on $\left[\frac{1}{\alpha}, 1\right]$, and $0$ is an isolated point of $A_\alpha$. As well, $f$ is not continuous at $0$ since for $x_n = 1/n, x_n \to 0$ but $f(x_n) \to \infty$ thus $f(x_n)$ does not converge to $0$. Thus, each $A_\alpha$ is closed and there are only a countable $A_\alpha$ (seen by the map $n \mapsto A_n$ for $n \in \NN$) but $f$ is not continuous. 
 
         \part \begin{proof}
-            Assume that $\braces{A_\alpha}$ is locally finite and each $A_\alpha$ closed. It follows that $X\setminus\cup_{\alpha} A_\alpha$ is open since for $x \not\in \bigcup A_\alpha$ there exists $U$ open that intersects finitely many many sets $A_1, \dots, A_k$. Then, take $V = U \setminus \left(A_1 \cup \dots \cup A_k\right)$ open since the finite union of closed sets is closed and $x \in V$ by definition. Thus $V$ misses every $A_\alpha$ since the infinite amount of $A_\alpha$ are already removed and the finite $A_k$ are not included, thus ever point of the complement has an open neighborhood inside the complement. Pick som $C \subset Y$ and set 
+            \textbf{Lemma.} If $\braces{D_\alpha}$ is a locally finite family of closed sets in $X$, then $\bigcup_\alpha D_\alpha$ is closed.
+
+            \textit{Proof of Lemma.} Let $x \notin \bigcup D_\alpha$. By local finiteness there is an open $U \ni x$ meeting only finitely many of the sets, say $D_1, \dots, D_k$ ($k = 0$ is allowed). Let $V = U \setminus (D_1 \cup \dots \cup D_k)$, which is open since a finite union of closed sets is closed, and $x \in V$ since $x$ lies in no $D_\alpha$. Then $V$ misses every $D_\alpha$: the sets other than $D_1, \dots, D_k$ miss $U$, and $D_1, \dots, D_k$ were removed. So every point of the complement has an open neighborhood inside the complement, and $\bigcup D_\alpha$ is closed.
+
+            Now assume $\braces{A_\alpha}$ is locally finite and each $A_\alpha$ is closed. Let $C \subseteq Y$ be closed and set 
             \[
                 B_\alpha = (f|_{A_{\alpha}})^{-1}(C) = A_{\alpha} \cap f^{-1}(C)
             \]
-            Since $X \bigcup A_{\alpha}$ we know $f^{-1}(C) = \bigcup B_\alpha$ where $B_\alpha$ is closed in $A_\alpha$ because $f|_{A_{\alpha}}$ is continuous. It follows that $B_\alpha$ is closed in $X$ since $A_\alpha$ is closed in $X$. Since $B_\alpha \subset A_\alpha$, any neighborhood that meets only finitely many $A_\alpha$ meets only finitely many $B_\alpha$, thus making $\braces{B_\alpha}$ locally finite. Thus $f^{-1}(C) = \bigcup B_\alpha$ is closed and $f$ is continuous.
+            Since $X = \bigcup A_{\alpha}$ we know $f^{-1}(C) = \bigcup B_\alpha$ where $B_\alpha$ is closed in $A_\alpha$ because $f|_{A_{\alpha}}$ is continuous. It follows that $B_\alpha$ is closed in $X$ since $A_\alpha$ is closed in $X$. Since $B_\alpha \subset A_\alpha$, any neighborhood that meets only finitely many $A_\alpha$ meets only finitely many $B_\alpha$, thus making $\braces{B_\alpha}$ locally finite. Thus, by the Lemma, $f^{-1}(C) = \bigcup B_\alpha$ is closed. Since $C$ was an arbitrary closed set, $f$ is continuous.
         \end{proof}
     \end{parts}
 \end{solution}
+
+\newpage 
 
 \colorbox{red}{\underline{2:}}
 \begin{solution}
     \begin{proof}
         \underline{Case 1:} Assume both topologies have the box topology. Then, a basis for the box topology on $X$ is 
         \[
-            \braces{\Pi U_\alpha \mid U_\alpha \text{ open in } X} 
+            \braces{\Pi U_\alpha \mid U_\alpha \text{ open in } X_\alpha} 
         \]
-        thus a basis for the subspace topology on $Y$ is 
+        thus, using $Y \cap \Pi U_\alpha = \Pi(A_\alpha \cap U_\alpha)$ (a point lies in both sides iff each coordinate lies in $A_\alpha$ and in $U_\alpha$), a basis for the subspace topology on $Y$ is 
         \[
-            \beta_{1} = \braces{\Pi(A_\alpha \cup U_\alpha) \mid U_\alpha \text{ open in } X}
+            \beta_{1} = \braces{\Pi(A_\alpha \cap U_\alpha) \mid U_\alpha \text{ open in } X_\alpha}
         \]
         A basis of the box topology on $Y$ is 
         \[
-            \braces{\Pi V_\alpha \mid V_\alpha \text{ open in } X} 
+            \braces{\Pi V_\alpha \mid V_\alpha \text{ open in } A_\alpha} 
         \]
-        but each $V_\alpha = A_\alpha \cap U_\alpha$ for $U_\alpha$ open in $X$. Thus, 
+        but each $V_\alpha = A_\alpha \cap U_\alpha$ for $U_\alpha$ open in $X_\alpha$. Thus, 
         \[
-            \beta_{2} = \braces{\Pi(A_\alpha \cap U_\alpha) \mid U_\alpha \text{ open in } X} 
+            \beta_{2} = \braces{\Pi(A_\alpha \cap U_\alpha) \mid U_\alpha \text{ open in } X_\alpha} 
         \]
         and $\beta_1 = \beta_2$ so their topologies are the same
 
-        \underline{Case 2:} Assume both topologiers are the product topologies which have basis 
+        \underline{Case 2:} Assume both topologies are the product topologies which have basis 
         \[
-            \braces{\Pi U_\alpha \mid U_\alpha \text{ open in $X_a$ and $U_\alpha = X_\alpha$ for all but finitely many $\alpha$}}
+            \braces{\Pi U_\alpha \mid U_\alpha \text{ open in $X_\alpha$ and $U_\alpha = X_\alpha$ for all but finitely many $\alpha$}}
         \]
-        Now, consider a basis element of the subspace topology $Y \cap \Pi U_\alpha = \Pi(A_\alpha \cap U_\alpha)$. But, each $A_\alpha \cap U_\alpha$ is open in $A_\alpha$, and for the $\alpha$ such that $U_\alpha = X_\alpha, A_\alpha \cap U_\alpha = A_\alpha \cap X_\alpha = A_\alpha$. Thus, this is a basis element of the product topology on $Y$. Take a basis element of the porduct topology on $Y$, $\Pi V_\alpha$ where $V_\alpha$ is open in $A_\alpha$ and $V_\alpha \neq A_\alpha$ for finitely many $\alpha$. For each $\alpha = 1, \dots, k$ such that $V_\alpha \neq A_\alpha$ choose $U_\alpha$ open in $X_\alpha$ with $V_\alpha = A_\alpha \cap U_\alpha$ and $U_\alpha = X_\alpha$ for all other $_\alpha$. Then $\Pi U_\alpha$ is a basis element of the proudct topology on $X$, since $U_\alpha = X_\alpha$ for all but finitely many $\alpha$. Also, 
+        Now, consider a basis element of the subspace topology $Y \cap \Pi U_\alpha = \Pi(A_\alpha \cap U_\alpha)$. But, each $A_\alpha \cap U_\alpha$ is open in $A_\alpha$, and for the $\alpha$ such that $U_\alpha = X_\alpha, A_\alpha \cap U_\alpha = A_\alpha \cap X_\alpha = A_\alpha$. Thus, this is a basis element of the product topology on $Y$. Take a basis element of the product topology on $Y$, $\Pi V_\alpha$ where $V_\alpha$ is open in $A_\alpha$ and $V_\alpha \neq A_\alpha$ for finitely many $\alpha$. For each of the finitely many $\alpha_1, \dots, \alpha_k$ such that $V_\alpha \neq A_\alpha$ choose $U_\alpha$ open in $X_\alpha$ with $V_\alpha = A_\alpha \cap U_\alpha$ and $U_\alpha = X_\alpha$ for all other $\alpha$. Then $\Pi U_\alpha$ is a basis element of the product topology on $X$, since $U_\alpha = X_\alpha$ for all but finitely many $\alpha$. Also, 
         \[
-            Y \cap \Pi U_\alpha = \Pi (A_\alpha = U_\alpha)  = \Pi V_\alpha
+            Y \cap \Pi U_\alpha = \Pi (A_\alpha \cap U_\alpha)  = \Pi V_\alpha
         \] 
-        for $\alpha = 1, \dots, k$. This is true by choice of $U_\alpha$ and for all other $\alpha$, $A_\alpha \cap X_\alpha = A_\alpha = V_\alpha$. Thus, $\Pi V_\alpha$ is open in the subspace topology and each topology contains each other's basis elements, and thus are equal.
+        for $\alpha \in \braces{\alpha_1, \dots, \alpha_k}$. This is true by choice of $U_\alpha$ and for all other $\alpha$, $A_\alpha \cap X_\alpha = A_\alpha = V_\alpha$. Thus, $\Pi V_\alpha$ is open in the subspace topology and each topology contains each other's basis elements, and thus are equal.
     \end{proof}
 \end{solution}
 
@@ -132,27 +144,27 @@
 \begin{solution}
     \begin{proof}
         $(\Rightarrow)$ Let $U$ be a neighborhood of $\pi_{\alpha}(x)$ in $X_\alpha$. Then $\pi_{\alpha}^{-1}(U)$ is open in the product by being a subbasis element, and it contains $x$. Since $x_i \to x$, we have that $x_i \in \pi_{\alpha}^{-1}(U)$ for $i$ large, so $\pi_{\alpha}(x_i) \in U$ also for $i$ large. \\
-        $(\Leftarrow)$ Let $\Pi U_\alpha$ be a basis element containing $x$ with $U_\alpha = X_\alpha$ for all but finite $\alpha$. Then for each $j$, $\pi_{\alpha_{j}}(x_i) \to \pi_{\alpha_{j}}(x)$ and $U_{\alpha_{j}}$ is a neighborhood of $\pi_{\alpha_{j}}$, so there is $N_j$ with $\pi_{\alpha_{j}}(x_i) \in U_{\alpha_{i}}$ for $i \geq N_j$. We take $N = \max\braces{N_1, \dots, N_k}$. For $i \geq N$ every $x_i \in U_\alpha$ for some $\alpha$ so $x_i \in \Pi U_\alpha$ and $x_i \to x$.
+        $(\Leftarrow)$ Let $\Pi U_\alpha$ be a basis element containing $x$ with $U_\alpha = X_\alpha$ for all $\alpha$ outside a finite set $\braces{\alpha_1, \dots, \alpha_k}$. Then for each $j$, $\pi_{\alpha_{j}}(x_i) \to \pi_{\alpha_{j}}(x)$ and $U_{\alpha_{j}}$ is a neighborhood of $\pi_{\alpha_{j}}(x)$, so there is $N_j$ with $\pi_{\alpha_{j}}(x_i) \in U_{\alpha_{j}}$ for $i \geq N_j$. We take $N = \max\braces{N_1, \dots, N_k}$. For $i \geq N$ we have $\pi_\alpha(x_i) \in U_\alpha$ for \textbf{every} $\alpha$ (for $\alpha \in \braces{\alpha_1, \dots, \alpha_k}$ by the choice of $N$, and trivially otherwise since $U_\alpha = X_\alpha$), so $x_i \in \Pi U_\alpha$. Hence $x_i \to x$.
     \end{proof}
 
-    In the box topology on $\RR^{\omega}$ take $x_i = \left(\frac{1}{i}, \frac{1}{i}, \dots\right)$ and $x = (0, 0, \dots)$. Then $\pi_{n}(x_i) = \frac{1}{i} \to 0$ but $U = \Pi\left(-\frac{1}{n}, \frac{1}{n}\right)$ is a box neighborhood of $0$ and $x_i \in U$ implies $\frac{1}{i} < \frac{1}{n}$ for all $n$ which is impossible.
+    In the box topology on $\RR^{\omega}$ take $x_i = \left(\frac{1}{i}, \frac{1}{i}, \dots\right)$ and $x = (0, 0, \dots)$. Then $\pi_{n}(x_i) = \frac{1}{i} \to 0$ but $U = \Pi\left(-\frac{1}{n}, \frac{1}{n}\right)$ is a box neighborhood of $0$ and $x_i \in U$ implies $\frac{1}{i} < \frac{1}{n}$ for all $n$, which is impossible (take $n = i$). So no $x_i$ lies in $U$ and $x_i \not\to x$ in the box topology. Thus the fact is \textbf{false} for the box topology, although $(\Rightarrow)$ still holds there since the projections are still continuous.
 \end{solution}
 
 \colorbox{red}{\underline{7:}}
 \begin{solution}
-    The closure of $\RR^{\infty}$ is $\RR^{\omega}$ in the product topoloy and $\RR^{\infty}$ in the box topology. 
+    The closure of $\RR^{\infty}$ is $\RR^{\omega}$ in the product topology and $\RR^{\infty}$ in the box topology. 
     \begin{proof}
-        Let $x= (x_1, x_2, \dots) \in R^{\omega}$ and let $\Pi U_n$ be a basis element containg $x$, with $U_n = \RR$ for $n > N$. Take $y = (x_1, \dots, x_n, 0, 0, \dots)$ so $y \in \RR^{\infty}$, and $y \in U_n$ for all $n$ ( for $n \leq N, y_n = x_n$ and for $n > N$ since $U_n = \RR$). So, every neighborhood of $x$ meets $\RR^{\infty}$, and the closure of $\RR^{\infty}$ is all of $\RR^{\omega}$. 
+        Let $x= (x_1, x_2, \dots) \in \RR^{\omega}$ and let $\Pi U_n$ be a basis element containing $x$, with $U_n = \RR$ for $n > N$. Take $y = (x_1, \dots, x_N, 0, 0, \dots)$ so $y \in \RR^{\infty}$, and $y \in U_n$ for all $n$ ( for $n \leq N, y_n = x_n$ and for $n > N$ since $U_n = \RR$). So, every neighborhood of $x$ meets $\RR^{\infty}$, and the closure of $\RR^{\infty}$ is all of $\RR^{\omega}$. 
 
         We now show $\RR^{\infty}$ is closed by showing its complement is open. Consider $x \not\in \RR^{\infty}$ so $x_n \neq 0$ for infinitely many $n$. Define 
         \[
             U_n = \begin{cases}
-                (x_n/2, 3x_n/2) \quad &\text{if } x_n \neq 0 \\
+                \left(x_n - \tfrac{|x_n|}{2},\, x_n + \tfrac{|x_n|}{2}\right) \quad &\text{if } x_n \neq 0 \\
                 \RR \quad &\text{if } x_n = 0
             \end{cases} 
         \]
-        Then $\Pi U_n$ is a box-neighborhood of $x$ Any $y$ in it has $y_n \neq 0$ whenever $x_n \neq 0$ which is infinitely many $n$ so $y \neq \RR^{\infty}$. Hence the complement is open so $\RR^{\infty}$ is closed and thus it is its own closure.
+        Then $\Pi U_n$ is a box-neighborhood of $x$. Any $y$ in it has $y_n \neq 0$ whenever $x_n \neq 0$ (since $0 \notin U_n$), which is infinitely many $n$, so $y \notin \RR^{\infty}$. Hence the complement is open so $\RR^{\infty}$ is closed and thus it is its own closure.
     \end{proof}
 \end{solution}
-
+\footnotetext{\LaTeX\, code for this document can be found on github \href{https://github.com/jeevanshah07/MATH441/blob/main/homework/homework3/main.tex}{\underline{here}}}
 \end{document}
