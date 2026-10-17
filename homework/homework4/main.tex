@@ -1,0 +1,269 @@
+\documentclass{exam}
+\usepackage{../../shah311}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Parikh \\ Intro Topology}{Homework 4}{Jeevan Shah}
+\runningheader{Intro Topology \\ Homework 4}{}{Shah}
+\firstpagefooter{}{}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+\begin{document}
+\colorbox{red}{\underline{20.4:}}
+\begin{solution}
+    \begin{parts}
+        \part \begin{itemize}
+            \item In the product topology, $f, g,$ and $h$ are continuous since the coordinate functions are continuous. 
+            \item For the uniform topology, we consider the metric $\overline{\rho}(x, y)$. Then, $f$ is not continuous since for $t \neq s$, 
+            \[
+                \overline{\rho}(f(t), f(s)) = \sup_i \min\braces{i|t - s|, 1} = 1
+            \]
+            since $i|t - s| \to \infty$, so $f(s)$ never gets within $1/2$ of $f(t)$ and no $\delta$ works for $\epsilon = 1/2$. $g$ is continuous, since
+            \[
+                \overline{\rho}(g(t), g(s)) = \min\braces{|t - s|, 1} \leq |t - s|
+            \]
+            $h$ is also continuous. Consider 
+            \[
+                \overline{\rho}(h(t), h(s)) = \sup_i\min\braces{\frac{|t-s|}{i}, 1} = \min\braces{|t-s|, 1} \leq |t - s|
+            \]
+            since the $\sup$ is attained at $i = 1$.
+
+            \item In the box topology $f$ cannot be continuous since it is not continuous in the uniform topology, and continuity in the box topology would imply continuity in the uniform topology because the box topology is finer. $g$ is also not continuous. Consider 
+            \[
+                U = \Pi \left(-\frac{1}{i}, \frac{1}{i}\right)
+            \]
+            an open box set containing $g(0) = 0$. So, 
+            \[
+                g^{-1}(U) = \braces{t \mid |t| < \frac{1}{i} \text{ for all } i} = \braces{0}
+            \]
+            which is not open in $\RR$. $h$ is also not continuous since for 
+            \[
+                U = \Pi\left(-\frac{1}{i^2}, \frac{1}{i^2}\right)
+            \]
+            we have 
+            \[
+                h^{-1}(U) = \braces{t \mid \frac{|t|}{i} < \frac{1}{i^2} \text{ for all } i} = \braces{t \mid |t| < \frac{1}{i} \text{ for all } i} = \braces{0}
+            \]
+            which is, again, not open in $\RR$.
+        \end{itemize}
+        \part \begin{itemize}
+            \item In the product topology, all of the sequences converge to $0$. Fix a coordinate $k$. For $w_n$ and $x_n$, the $k$-th coordinate is $0$ once $n > k$. For $y_n$, the $k$-th coordinate is $1/n$ for $n \geq k$, which tends to $0$, and for $z_n$, coordinates $1$ and $2$ are $1/n$, which tends to $0$ (all others are $0$). 
+            \item In the uniform topology, $w_n$ does not converge to $0$ (the only possible limit, since the product limit is $0$): 
+            \[
+                \overline{\rho}(w_n, 0) = \min\braces{n, 1} = 1 
+            \]
+            for all $n$. $x_n, y_n,$ and $z_n$ all converge as $\overline{\rho}(\cdot, 0) = \frac{1}{n} \to 0$.
+            \item In the box topology, $w_n$ cannot converge because it doesn't converge in the uniform topology and the box topology is finer than the uniform topology. $x_n$ and $y_n$ do not converge. Take 
+            \[
+                U = \Pi \left(-\frac{1}{2i}, \frac{1}{2i}\right) 
+            \]
+            so that in position $i = n$, $x_n$ has entry $\frac{1}{n}$ but $\frac{1}{n} \not < \frac{1}{2n}$ so $x_n \not\in U$. Similarly, $y_n \not\in U$. $z_n$ does converge. We take any box neighborhood of $0$ which will contain some 
+            \[
+                \Pi (-\epsilon_i, \epsilon_i)
+            \]
+            for $\epsilon_i > 0$. Now, only $\epsilon_1$, and $\epsilon_2$ are important as $z_n$ is $0$ elsewhere, so we choose $N$ with 
+            \[
+                \frac{1}{N} < \min\braces{\epsilon_1, \epsilon_2}
+            \]
+            so $z_n \in \Pi(-\epsilon_i, \epsilon_i)$ for $n \geq N$.
+        \end{itemize}
+    \end{parts}
+\end{solution}
+
+\colorbox{red}{\underline{20.5:}}
+\begin{solution}
+    We claim that the closure of $\RR^{\infty}$ in the uniform topology is $c_0 = \braces{x \in \RR^\omega \mid x_n \to 0}$.
+    \begin{proof}
+        Let $x_n \to 0$ and fix some $\epsilon \in (0, 1)$. Then, choose $N$ such that $|x_i| < \frac{\epsilon}{2}$ for $i > N$. Define 
+        \[
+            y = (x_1, \dots, x_{N}, 0, 0, \dots)
+        \]
+        so $y \in \RR^\infty$. The first $N$ coordinates of $x$ and $y$ are the same so 
+        \[
+            \overline{\rho}(x, y) = \sup_{i > N}\min\braces{|x_i|, 1} \leq \frac{\epsilon}{2} < \epsilon
+        \]
+        Thus $y \in B(x, \epsilon) \cap \RR^\infty$ and because $\epsilon$ was arbitrary, $x$ is in the closure. \\
+        Now, suppose $x \not\in c_0$. Then $x_n$ does not converge to $0$ so there exists some $0 < \delta < 1$ such that $|x_i| \geq \delta$ for infinitely many $i$. Now let $y \in \RR^\infty$ be anything with $y_i = 0$ for all $i > M$. Pick some $i > M$ with $|x_i| \geq \delta$ so 
+        \[
+            \overline{\rho}(x, y) \geq \min\braces{|x_i - y_i|, 1} = \min\braces{|x_i|, 1} \geq \delta
+        \]
+        so $B(x, \delta)$ contains no point of $\RR^\infty$, and $x$ is not in the closure. \\
+        Thus the closure is equal to $c_0$.
+    \end{proof}
+\end{solution}
+
+\colorbox{red}{\underline{20.8:}}
+\begin{solution}
+    \begin{parts}
+        \part \begin{proof}
+            \underline{uniform $\subseteq \ell^2$:} For all $x, y \in X$, every coordinate satisifies $|x_i - y_i| \leq d(x, y)$, so $\overline{\rho}(x, y) \leq d(x, y)$. Hence, $B_d(x, \epsilon) \subseteq B_{\overline{\rho}}(x, \epsilon)$ for every $\epsilon$. Given a uniform open $W$ and $x \in W$, pick $\epsilon$ with $B_{\overline{\rho}}(x, \epsilon) \subseteq W$ so $B_d(x, \epsilon) \subseteq W$ and $W$ is $d$-open. \\
+            \underline{$\ell^{2} \subseteq$ box:} Let $W$ be $d$-open and $x \in W$. Pick $\epsilon > 0$ with $B_d(x, \epsilon) \subseteq W$. Define the box-open set 
+            \[
+                U = \Pi\left(x_i - \frac{\epsilon}{2^i}, x_i + \frac{\epsilon}{2^i}\right)
+            \]
+            For $y \in U \cap X$, 
+            \[
+                d(x, y)^2 = \sum(x_i - y_i)^2 \leq \sum\frac{\epsilon^{2}}{4^i} = \frac{\epsilon^2}{3} < \epsilon^2
+            \]
+            so $U \cap X \subseteq B_d(x, \epsilon) \subseteq W$. Thus $W$ is a union of sets of the form $U \cap X$, so it is open in the box topology on $X$.
+        \end{proof}
+
+        \part \begin{proof}
+            Restricting $(a)$, and using that product $\subseteq$ uniform, we get that for $\RR^\infty$: product $\subseteq$ uniform $\subseteq \ell^2 \subseteq$ box. \\
+            \underline{Product $\neq$ uniform:} Let 
+            \[
+                V = \braces{x \in \RR^\infty \mid \sup|x_i| < \frac{1}{2}} = B_{\overline{\rho}}\left(0, \frac{1}{2}\right) \cap \RR^\infty
+            \]
+            which is uniform open. Any product basis set around $0$ has the form $\Pi U_i$ with $U_i = \RR$ for $i > N$. It contains the point $y$ with $y_{N+1} = 1$ and all other coordinates $0$, and $y \not\in V$ so $V$ is not product open. \\
+            \underline{Uniform $\neq \ell^2$:} Let $V = B_d(0, 1) \cap \RR^\infty$, which is $\ell^2$ open. Any uniform neighborhood of $0$ contains $B_{\overline{\rho}}(0, \delta) \cap \RR^\infty$ for some $\delta \in (0, 1)$. Take $n > \frac{4}{\delta^2}$ and $y = \left(\frac{\delta}{2}, \frac{\delta}{2}, \dots, \frac{\delta}{2}, 0, 0, \dots\right)$ with $n$ entries equal to $\frac{\delta}{2}$. Then $\overline{\rho}(0, y) = \frac{\delta}{2} < \delta$ so $y$ is in the ball, but $d(0, y) = \frac{\delta}{2}\sqrt{n} > 1$, so $y \not\in V$. Hence $V$ is not uniform open. \\
+            \underline{$\ell^2 \neq$ box:} Let $U = \Pi\left(-\frac{1}{i}, \frac{1}{i}\right) \cap \RR^\infty$, which is box open. Any $d$-ball $B_d(0, \delta)$ contains $y = \frac{\delta}{2}e_i$ (entry $\frac{\delta}{2}$ in position $i$ and $0$ elsewhere), since $d(0, y) = \frac{\delta}{2} < \delta$. Choose $i \geq \frac{2}{\delta}$, so $\frac{\delta}{2} \geq \frac{1}{i}$. Then $y \not\in U$, so $U$ contains no $d$-ball around $0$ and is not $\ell^2$ open. \\
+            So product $\subsetneq$ uniform $\subsetneq \ell^2 \subsetneq $ box on $\RR^\infty$
+        \end{proof}
+
+        \part We claim that on $H$, product = uniform = $\ell^2$ and the box topology is strictly finer.
+        \begin{proof}
+            \underline{product = uniform = $\ell^2$:} On $H$ we already have that 
+            \[
+                \text{product $\subseteq$ uniform $\subseteq \ell^2$}
+            \]
+            so it suffices to show $\ell^2 \subseteq$ product. Let $x \in H$ and $\epsilon > 0$. Choose $N$ with $\sum_{i > N} \frac{1}{i^2} < \frac{\epsilon^2}{2}$ and define 
+            \[
+                U = \braces{y \mid |y_i - x_i| < \frac{\epsilon}{\sqrt{2N}}, i \leq N}
+            \]
+            so its product open (because it restricts only finitely many coordinates). Now, for $y \in U \cap H$, if $i > N$ then both $x_i, y_i \in [0, 1/i]$, so $|x_i - y_i| \leq 1/i$. Then, 
+            \[
+                d(x, y)^2 = \sum_{i \leq N}(x_i - y_i)^2 + \sum_{i > N}(x_i - y_i)^2 < N \cdot \frac{\epsilon^{2}}{2N} + \sum_{i > N}\frac{1}{i^2} < \frac{\epsilon^{2}}{2} + \frac{\epsilon^2}{2} = \epsilon^2
+            \]
+            and thus $U \cap H \subseteq B_d(x, \epsilon)$. Every $d$-open set is therefore product open on $H$, and the three topologies coincide. \\
+            \underline{Box is strictly finer:} Consider 
+            \[
+                U = H \cap \Pi\left(-1, \frac{1}{2n}\right) = \braces{x \in H \mid x_n < \frac{1}{2n},\,\forall\,n}
+            \]
+            which is box open and contains $0$. Any product basis set $\Pi U_i \cap H$ around $0$ has $U_i = \RR$ for $i > N$. It contains the point $y$ with $y_{N+1} = \frac{1}{N+1}$ and all other coordinates $0$, so $y \in H$. But, $y \not\in U$ since 
+            \[
+                \frac{1}{N+1} \not < \frac{1}{2(N+1)}
+            \]
+            and thus $U$ is not product open.
+        \end{proof}
+    \end{parts}
+\end{solution}
+
+\newpage 
+
+\colorbox{red}{\underline{21.3:}}
+\begin{solution}
+    \begin{parts}
+        \part \begin{proof}
+            We must show that $\rho(x, y)$ is a metric. It is clearly true that $\rho(x, y) \geq 0$ for $x \neq y$, $\rho(x, y) = 0$ if and only if $x = y$ and $\rho(x, y) = \rho(y, x)$ since each $d_n$ is a metric itself. We now show the triangle inequality holds under $\rho$. Consider, $x = (x_1, \dots, x_n), y = (y_1, \dots, y_n)$, and $z = (z_1, \dots, z_n)$, and fix some $i \in \braces{1, \dots, n}$. Then, since each $d_i$ is a metric, it satisfies the triangle inequality: 
+            \[
+                d_i(x_i, z_i) \leq d_i(x_i, y_i) + d_i(y_i, z_i) \leq \rho(x, y) + \rho(y, z)
+            \]
+            since $d_i(x_i, y_i) \leq \rho(x, y)$ and $d_i(y_i, z_i) \leq \rho(y, z)$. This holds for all $i$, so the right-hand side is an upper bound for every $d_i(x_i, z_i)$, and the max is the least upper bound, so: 
+            \[
+                \rho(x, z) = \max\braces{d_i(x_i, z_i)} \leq \rho(x, y) + \rho(y, z)
+            \]
+        \end{proof}
+
+        \part \begin{proof}
+            We must show that $D$ is a metric. It is clear that $D(x, y) \geq 0$ for $x \neq y$, $D(x, y) = 0$ if and only if $x = y$, and $D(x, y) = D(y, x)$ using the fact that each $\overline{d}_i$ is a metric. ($D$ is well defined since $\overline{d}_i/i \leq 1$, so the supremum is finite. Also, $\overline{d}_i$ satisfies the triangle inequality: if either term on the right is $1$ then the right side is at least $1 \geq \overline{d}_i(x_i, z_i)$, and otherwise $\overline{d}_i(x_i, z_i) \leq d_i(x_i, z_i) \leq d_i(x_i, y_i) + d_i(y_i, z_i)$.) We now show the triangle inequality holds. Consider $x = (x_i), y = (y_i)$, and $z = (z_i)$ and fix some $i$. Since $\overline{d}_i$ is a metric,
+            \[
+                \frac{\overline{d}_i(x_i, z_i)}{i} \leq \frac{\overline{d}_i(x_i, y_i)}{i} + \frac{\overline{d}_i(y_i, z_i)}{i} \leq D(x, y) + D(y, z)
+            \]
+            since each term is at most the supremum over all indices. This holds for every $i$, so $D(x, y) + D(y, z)$ is an upper bound for every $\overline{d}_i(x_i, z_i)/i$, and therefore
+            \[
+                D(x, z) = \sup_i \frac{\overline{d}_i(x_i, z_i)}{i} \leq D(x, y) + D(y, z)
+            \]
+            and hence $D$ is a metric.
+        \end{proof}
+    \end{parts}
+\end{solution}
+
+\colorbox{red}{\underline{21.7:}}
+\begin{solution}
+    \begin{proof}
+        It suffices to treat $\epsilon \in (0, 1)$ in both directions, since a smaller $\epsilon$ is a stronger requirement. \\
+        $(\Rightarrow)$ Let $\epsilon \in (0, 1)$. By uniform convergence, pick $N$ such that for all $n \geq N$ and all $x \in X$, 
+        \[
+            |f_n(x) - f(x)| < \frac{\epsilon}{2}
+        \]
+        Then, for every $x$, 
+        \[
+            \min\braces{|f_n(x) - f(x)|, 1} \leq |f_n(x) - f(x)| < \frac{\epsilon}{2}
+        \]
+        so $\frac{\epsilon}{2}$ is an upper bound for all these numbers, and the $\sup$ is at most $\frac{\epsilon}{2}$. Thus, $\overline{\rho}(f_n, f) \leq \frac{\epsilon}{2} < \epsilon$ for all $n \geq N$. \\
+        $(\Leftarrow)$ Let $\epsilon \in (0, 1)$. Since $\overline{\rho}(f_n, f) \to 0$ pick $N$ such that $\overline{\rho}(f_n, f) < \epsilon$ for all $n \geq N$. Fix one such $n \geq N$ and any $x \in X$. Then because a supremum is at least each of its terms, 
+        \[
+            \min\braces{|f_n(x) - f(x)|, 1} \leq \overline{\rho}(f_n, f) < \epsilon < 1
+        \]
+        thus $\min\braces{|f_n(x) - f(x)|, 1} = |f_n(x) - f(x)|$ and hence 
+        \[
+            |f_n(x) - f(x)| < \epsilon
+        \]
+        for all $x \in X$ and $n \geq N$, which is by definition uniform convergence.
+    \end{proof}
+\end{solution}
+
+\colorbox{red}{\underline{21.9:}}
+\begin{solution}
+    \begin{parts}
+        \part Fix some $x \in \RR$. If $x \neq 0$ then $x - 1/n \to x$ so $\left(x - \frac{1}{n}\right)^2 \to x^2 > 0$ while $n^3 \to \infty$, hence $n^3\left[x - \frac{1}{n}\right]^2 + 1 \to \infty$ as $n \to \infty$ and thus $f_n(x) \to 0 = f(x)$. If $x = 0$ then, 
+        \[
+            f_n(0) = \frac{1}{n^3\left[-\frac{1}{n}\right]^2 + 1} = \frac{1}{n+1} \to 0 = f(0)
+        \]
+        and hence in either case $f_n(x) \to f(x)$.
+
+        \part Take $\epsilon = \frac{1}{2}$ and suppose some $N$ satisfied $|f_n(x) - f(x)| < \epsilon$ for all $n \geq N$ and all $x \in \RR$. Evaluate at $n = N$ and $x = \frac{1}{N}$:
+        \[
+            f_N\left(\frac{1}{N}\right) = \frac{1}{N^3\left[\frac{1}{N} - \frac{1}{N}\right]^2 + 1} = 1
+        \]
+        so $\left|f_N\left(\frac{1}{N}\right) - f\left(\frac{1}{N}\right)\right| = 1 \geq \frac{1}{2}$, a contradiction. Hence no such $N$ exists, and $f_n$ does not converge uniformly to $f$. (Equivalently, $\sup_x |f_n(x) - f(x)| \geq f_n(1/n) = 1$ for every $n$, so it does not tend to $0$.) This does not contradict part (a), since in the pointwise argument $N$ depends on $x$.
+    \end{parts}
+\end{solution}
+
+
+\colorbox{red}{\underline{22.2:}}
+\begin{solution}
+    \begin{parts}
+        \part \begin{proof}
+            We must show that $p$ is surjective and that $U$ is open in $Y$ if and only if $p^{-1}(U)$ is open in $X$. It is clear that $p$ is surjective as for all $y \in Y, f(y) \in X$ and $p(f(y)) = y$ by assumption. It is also trivial that if $U$ is open in $Y$, then $p^{-1}(U)$ is open in $X$ by the fact that $p$ is continuous. So, assume $p^{-1}(U)$ is open in $X$. By 
+            \[
+                f^{-1}(p^{-1}(U)) = \left(p \circ f\right)^{-1}(U) = (\id_Y)^{-1}(U) = U
+            \]
+            The left-hand side is open in $Y$ since $p^{-1}(U)$ is open in $X$ and $f$ is continuous, so $U$ is open in $Y$. \\ Thus $p$ is a quotient map.
+        \end{proof}
+
+        \part \begin{proof}
+            Let $r: X \to A$ be a retraction and let $\iota: A \to X$ be the inclusion map, $\iota(a) = a$. Then $\iota$ is continuous, since the topology on $A$ is the subspace topology inherited from $X$: for $U$ open in $X$, 
+            \[
+                \iota^{-1}(U) = U \cap A,
+            \]
+            which is open in $A$. Moreover, for every $a \in A$,
+            \[
+                (r \circ \iota)(a) = r(a) = a,
+            \]
+            so $r \circ \iota = \mathrm{id}_A$. Thus $r: X \to A$ is a continuous map and $\iota: A \to X$ is a continuous map with $r \circ \iota$ equal to the identity of $A$. By part (a), $r$ is a quotient map.
+        \end{proof}
+    \end{parts}
+\end{solution}
+
+\colorbox{red}{\underline{22.4:}}
+\begin{solution}
+    \begin{parts}
+        \part We claim $X^* \cong \RR$. 
+        \begin{proof}
+            Let $g(x, y) = x + y^2$. Then $g$ is continuous, and $(x_0, y_0) \sim (x_1, y_1)$ if and only if $g(x_0, y_0) = g(x_1, y_1)$, so the equivalence classes are the level sets of $g$ (the parabolas $x = c - y^2$). The map $g$ is onto $\RR$, and $h(t) = (t, 0)$ is continuous with $g(h(t)) = t$, so $g \circ h = \id_{\RR}$. Thus, by $(22.2a)$, $g$ is a quotient map. Let $\pi: X \to X^*$ be the quotient map and define $\overline{g}: X^* \to \RR$ by $\overline{g}([(x, y)]) = x + y^2$, which is well defined since $g$ is constant on classes. It is a bijection: one-to-one since different parabolas have different $c$-values, and onto because each $c \in \RR$ has a parabola. It is continuous since for $U$ open in $\RR$, $\pi^{-1}(\overline{g}^{-1}(U)) = g^{-1}(U)$ is open in $X$, so $\overline{g}^{-1}(U)$ is open in $X^*$. It is open since for $V$ open in $X^*$, $g^{-1}(\overline{g}(V)) = \pi^{-1}(V)$ is open in $X$, so $\overline{g}(V)$ is open in $\RR$ because $g$ is a quotient map. Thus $\overline{g}$ is a homeomorphism and $X^* \cong \RR$.
+        \end{proof}
+        
+        \part We claim $X^* \cong [0, \infty)$
+        \begin{proof}
+            Let $g(x, y) = x^2 + y^2$. Similar to part $(a)$, $g$ is continuous and $(x_0, y_0) \sim (x_1, y_1)$ if and only if $g(x_0, y_0) = g(x_1, y_1)$, so the classes are the circles $x^2 + y^2 = c$ (with $\braces{(0, 0)}$ the class for $c = 0$). The image of $g$ is $[0, \infty)$, so we regard $g: \RR^2 \to [0, \infty)$ with the subspace topology on $[0, \infty)$. The map $h(t) = (\sqrt{t}, 0)$ is continuous on $[0, \infty)$ with $g(h(t)) = t$, so $g \circ h = \id_{[0, \infty)}$, and $g$ is a quotient map by $(22.2a)$. As in $(a)$, the induced map $\overline{g}: X^* \to [0, \infty)$, $\overline{g}([(x, y)]) = x^2 + y^2$, is a continuous open bijection, hence a homeomorphism, so $X^* \cong [0, \infty)$.
+        \end{proof}
+    \end{parts}
+\end{solution}
+\footnotetext{\LaTeX\, code for this document can be found on github \href{https://github.com/jeevanshah07/MATH441/blob/main/homework/homework4/main.tex}{\underline{here}}}
+\end{document}
